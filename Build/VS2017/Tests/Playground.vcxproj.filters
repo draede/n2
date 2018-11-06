@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\N2">
+      <UniqueIdentifier>{e64d716c-bb06-4d5f-930c-f1080d9882b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\N2">
+      <UniqueIdentifier>{b2a72b87-9c38-42c1-8eef-e070ec655577}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\N2\NET">
+      <UniqueIdentifier>{de26ec43-2b95-4307-bea0-e91a95355a79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\N2\NET">
+      <UniqueIdentifier>{842e54fb-189f-438c-906d-b0faaac428ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\N2\CL">
+      <UniqueIdentifier>{48f230f5-fbe1-47b0-80a5-583904b1dd85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\N2\CL">
+      <UniqueIdentifier>{08064b60-aa2b-47cd-862b-92beccb71c19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\N2\CE">
+      <UniqueIdentifier>{f70f9623-65b5-4a77-88ff-67a6d4d84109}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\N2\CL\Kernels">
+      <UniqueIdentifier>{85eed64b-1147-4169-821e-ea2ed7d94eca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\N2\SWST">
+      <UniqueIdentifier>{b3606eb8-28ea-4bd5-9c08-e8abf4f99924}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\N2\SWST">
+      <UniqueIdentifier>{9aa96a2b-e0d0-4c8c-94e6-59585dcdafd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\N2\SWMT">
+      <UniqueIdentifier>{e5c1abdf-d73b-455f-84c2-6e53ea4cf721}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\N2\SWMT">
+      <UniqueIdentifier>{44f2b700-0880-4675-9fcb-1629b4a0125e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Tests\Playground\Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\NET\Network.cpp">
+      <Filter>Source Files\N2\NET</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\CL\CLNetwork.cpp">
+      <Filter>Source Files\N2\CL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\CL\OpenCL.cpp">
+      <Filter>Source Files\N2\CL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\CL\CLProvider.cpp">
+      <Filter>Source Files\N2\CL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\NET\Neurons.cpp">
+      <Filter>Source Files\N2\NET</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\NET\Synapses.cpp">
+      <Filter>Source Files\N2\NET</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\CL\CLNeurons.cpp">
+      <Filter>Source Files\N2\CL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\CL\CLSynapses.cpp">
+      <Filter>Source Files\N2\CL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\CL\CLConfig.cpp">
+      <Filter>Source Files\N2\CL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\CL\CLKernelSources.cpp">
+      <Filter>Source Files\N2\CL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\SWST\SWSTConfig.cpp">
+      <Filter>Source Files\N2\SWST</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\SWST\SWSTNetwork.cpp">
+      <Filter>Source Files\N2\SWST</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\SWST\SWSTNeurons.cpp">
+      <Filter>Source Files\N2\SWST</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\SWST\SWSTProvider.cpp">
+      <Filter>Source Files\N2\SWST</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\SWST\SWSTSynapses.cpp">
+      <Filter>Source Files\N2\SWST</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\SWMT\SWMTConfig.cpp">
+      <Filter>Source Files\N2\SWMT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\SWMT\SWMTNetwork.cpp">
+      <Filter>Source Files\N2\SWMT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\SWMT\SWMTNeurons.cpp">
+      <Filter>Source Files\N2\SWMT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\SWMT\SWMTProvider.cpp">
+      <Filter>Source Files\N2\SWMT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\SWMT\SWMTSynapses.cpp">
+      <Filter>Source Files\N2\SWMT</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Include\N2\NET\Activation.hpp">
+      <Filter>Header Files\N2\NET</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Include\N2\NET\Network.hpp">
+      <Filter>Header Files\N2\NET</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Include\N2\CL\Network.hpp">
+      <Filter>Header Files\N2\CL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Include\N2\CL\KernelSources.hpp">
+      <Filter>Header Files\N2\CL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Include\N2\CL\OpenCL.hpp">
+      <Filter>Header Files\N2\CL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Include\N2\CE\IConfig.hpp">
+      <Filter>Header Files\N2\CE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Include\N2\CE\INetwork.hpp">
+      <Filter>Header Files\N2\CE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Include\N2\CE\IProvider.hpp">
+      <Filter>Header Files\N2\CE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Include\N2\CL\Config.hpp">
+      <Filter>Header Files\N2\CL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Include\N2\CL\Provider.hpp">
+      <Filter>Header Files\N2\CL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Include\N2\NET\Neurons.hpp">
+      <Filter>Header Files\N2\NET</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Include\N2\NET\Synapses.hpp">
+      <Filter>Header Files\N2\NET</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Include\N2\NET\Layer.hpp">
+      <Filter>Header Files\N2\NET</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Include\N2\CE\INeurons.hpp">
+      <Filter>Header Files\N2\CE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Include\N2\CE\ISynapses.hpp">
+      <Filter>Header Files\N2\CE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Include\N2\CL\Neurons.hpp">
+      <Filter>Header Files\N2\CL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Include\N2\CL\Synapses.hpp">
+      <Filter>Header Files\N2\CL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Include\N2\SWST\Config.hpp">
+      <Filter>Header Files\N2\SWST</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Include\N2\SWST\Network.hpp">
+      <Filter>Header Files\N2\SWST</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Include\N2\SWST\Neurons.hpp">
+      <Filter>Header Files\N2\SWST</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Include\N2\SWST\Provider.hpp">
+      <Filter>Header Files\N2\SWST</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Include\N2\SWST\Synapses.hpp">
+      <Filter>Header Files\N2\SWST</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Include\N2\SWMT\Config.hpp">
+      <Filter>Header Files\N2\SWMT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Include\N2\SWMT\Network.hpp">
+      <Filter>Header Files\N2\SWMT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Include\N2\SWMT\Neurons.hpp">
+      <Filter>Header Files\N2\SWMT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Include\N2\SWMT\Provider.hpp">
+      <Filter>Header Files\N2\SWMT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Include\N2\SWMT\Synapses.hpp">
+      <Filter>Header Files\N2\SWMT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Include\N2\SWMT\IKernel.hpp">
+      <Filter>Header Files\N2\SWMT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Tests\Playground\SimpleTest.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Tests\Playground\XORTest.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\Src\CL\Kernels\Compute.cl">
+      <Filter>Source Files\N2\CL\Kernels</Filter>
+    </None>
+    <None Include="..\..\..\Src\CL\Kernels\Activate.cl">
+      <Filter>Source Files\N2\CL\Kernels</Filter>
+    </None>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{10397F60-EC15-4337-8C43-1364BD7D6EFE}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Playground</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)../../../Bin/$(Platform)/$(Configuration)/</OutDir>
+    <IntDir>$(SolutionDir)../../../Temp/$(Platform)/$(Configuration)/Tests/$(ProjectName)//</IntDir>
+    <TargetName>playground</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)../../../Bin/$(Platform)/$(Configuration)/</OutDir>
+    <IntDir>$(SolutionDir)../../../Temp/$(Platform)/$(Configuration)/Tests/$(ProjectName)//</IntDir>
+    <TargetName>playground</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)../../../Bin/$(Platform)/$(Configuration)/</OutDir>
+    <IntDir>$(SolutionDir)../../../Temp/$(Platform)/$(Configuration)/Tests/$(ProjectName)//</IntDir>
+    <TargetName>playground</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)../../../Bin/$(Platform)/$(Configuration)/</OutDir>
+    <IntDir>$(SolutionDir)../../../Temp/$(Platform)/$(Configuration)/Tests/$(ProjectName)//</IntDir>
+    <TargetName>playground</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>CX_API_STATIC;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>../../../Include;../../../../CX/Include;c:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\include;c:\Program Files (x86)\AMD APP SDK\3.0\include;c:\Intel\OpenCL\sdk\include</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile />
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../../../../CX/Lib/VS2017/$(Platform)/Static$(Configuration);c:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\lib\Win32;c:\Program Files (x86)\AMD APP SDK\3.0\lib\x86;c:\Intel\OpenCL\sdk\lib\x86</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cx.lib;opencl.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy /y $(SolutionDir)../../../Src\CL\Kernels\*.cl $(SolutionDir)../../../Bin\$(Platform)\$(Configuration)\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>CX_API_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>../../../Include;../../../../CX/Include;c:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\include;c:\Program Files (x86)\AMD APP SDK\3.0\include;c:\Intel\OpenCL\sdk\include</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile />
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../../../../CX/Lib/VS2017/$(Platform)/Static$(Configuration);c:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\lib\x64;c:\Program Files (x86)\AMD APP SDK\3.0\lib\x86_64;c:\Intel\OpenCL\sdk\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cx.lib;opencl.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy /y $(SolutionDir)..\..\..\Src\CL\Kernels\*.cl $(SolutionDir)..\..\..\Bin\$(Platform)\$(Configuration)\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>CX_API_STATIC;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>../../../Include;../../../../CX/Include;c:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\include;c:\Program Files (x86)\AMD APP SDK\3.0\include;c:\Intel\OpenCL\sdk\include</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile />
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../../../../CX/Lib/VS2017/$(Platform)/Static$(Configuration);c:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\lib\Win32;c:\Program Files (x86)\AMD APP SDK\3.0\lib\x86;c:\Intel\OpenCL\sdk\lib\x86</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cx.lib;opencl.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy /y $(SolutionDir)../../../Src\CL\Kernels\*.cl $(SolutionDir)../../../Bin\$(Platform)\$(Configuration)\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>CX_API_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>../../../Include;../../../../CX/Include;c:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\include;c:\Program Files (x86)\AMD APP SDK\3.0\include;c:\Intel\OpenCL\sdk\include</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile />
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../../../../CX/Lib/VS2017/$(Platform)/Static$(Configuration);c:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\lib\x64;c:\Program Files (x86)\AMD APP SDK\3.0\lib\x86_64;c:\Intel\OpenCL\sdk\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cx.lib;opencl.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy /y $(SolutionDir)../../../Src\CL\Kernels\*.cl $(SolutionDir)../../../Bin\$(Platform)\$(Configuration)\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Tests\Playground\Main.cpp" />
+    <ClCompile Include="..\..\..\Src\CL\CLProvider.cpp" />
+    <ClCompile Include="..\..\..\Src\CL\CLNeurons.cpp" />
+    <ClCompile Include="..\..\..\Src\CL\CLNetwork.cpp" />
+    <ClCompile Include="..\..\..\Src\CL\CLSynapses.cpp" />
+    <ClCompile Include="..\..\..\Src\CL\CLConfig.cpp" />
+    <ClCompile Include="..\..\..\Src\CL\CLKernelSources.cpp" />
+    <ClCompile Include="..\..\..\Src\CL\OpenCL.cpp" />
+    <ClCompile Include="..\..\..\Src\NET\Neurons.cpp" />
+    <ClCompile Include="..\..\..\Src\NET\Network.cpp" />
+    <ClCompile Include="..\..\..\Src\NET\Synapses.cpp" />
+    <ClCompile Include="..\..\..\Src\SWMT\SWMTConfig.cpp" />
+    <ClCompile Include="..\..\..\Src\SWMT\SWMTNetwork.cpp" />
+    <ClCompile Include="..\..\..\Src\SWMT\SWMTNeurons.cpp" />
+    <ClCompile Include="..\..\..\Src\SWMT\SWMTProvider.cpp" />
+    <ClCompile Include="..\..\..\Src\SWMT\SWMTSynapses.cpp" />
+    <ClCompile Include="..\..\..\Src\SWST\SWSTConfig.cpp" />
+    <ClCompile Include="..\..\..\Src\SWST\SWSTNetwork.cpp" />
+    <ClCompile Include="..\..\..\Src\SWST\SWSTNeurons.cpp" />
+    <ClCompile Include="..\..\..\Src\SWST\SWSTProvider.cpp" />
+    <ClCompile Include="..\..\..\Src\SWST\SWSTSynapses.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Include\N2\CE\IProvider.hpp" />
+    <ClInclude Include="..\..\..\Include\N2\CE\INeurons.hpp" />
+    <ClInclude Include="..\..\..\Include\N2\CE\INetwork.hpp" />
+    <ClInclude Include="..\..\..\Include\N2\CE\ISynapses.hpp" />
+    <ClInclude Include="..\..\..\Include\N2\CE\IConfig.hpp" />
+    <ClInclude Include="..\..\..\Include\N2\CL\Config.hpp" />
+    <ClInclude Include="..\..\..\Include\N2\CL\Provider.hpp" />
+    <ClInclude Include="..\..\..\Include\N2\CL\KernelSources.hpp" />
+    <ClInclude Include="..\..\..\Include\N2\CL\Neurons.hpp" />
+    <ClInclude Include="..\..\..\Include\N2\CL\Network.hpp" />
+    <ClInclude Include="..\..\..\Include\N2\CL\OpenCL.hpp" />
+    <ClInclude Include="..\..\..\Include\N2\CL\Synapses.hpp" />
+    <ClInclude Include="..\..\..\Include\N2\NET\Activation.hpp" />
+    <ClInclude Include="..\..\..\Include\N2\NET\Layer.hpp" />
+    <ClInclude Include="..\..\..\Include\N2\NET\Neurons.hpp" />
+    <ClInclude Include="..\..\..\Include\N2\NET\Network.hpp" />
+    <ClInclude Include="..\..\..\Include\N2\NET\Synapses.hpp" />
+    <ClInclude Include="..\..\..\Include\N2\SWMT\Config.hpp" />
+    <ClInclude Include="..\..\..\Include\N2\SWMT\IKernel.hpp" />
+    <ClInclude Include="..\..\..\Include\N2\SWMT\Network.hpp" />
+    <ClInclude Include="..\..\..\Include\N2\SWMT\Neurons.hpp" />
+    <ClInclude Include="..\..\..\Include\N2\SWMT\Provider.hpp" />
+    <ClInclude Include="..\..\..\Include\N2\SWMT\Synapses.hpp" />
+    <ClInclude Include="..\..\..\Include\N2\SWST\Config.hpp" />
+    <ClInclude Include="..\..\..\Include\N2\SWST\Network.hpp" />
+    <ClInclude Include="..\..\..\Include\N2\SWST\Neurons.hpp" />
+    <ClInclude Include="..\..\..\Include\N2\SWST\Provider.hpp" />
+    <ClInclude Include="..\..\..\Include\N2\SWST\Synapses.hpp" />
+    <ClInclude Include="..\..\..\Tests\Playground\SimpleTest.hpp" />
+    <ClInclude Include="..\..\..\Tests\Playground\XORTest.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\Src\CL\Kernels\Activate.cl" />
+    <None Include="..\..\..\Src\CL\Kernels\Compute.cl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

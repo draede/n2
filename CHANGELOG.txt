@@ -1,2 +1,4 @@
+0.0.2 - 2018-11-06
+ - Fixed XOR sample (bias value)
 0.0.1 - 2018-11-06
  - Initial commit

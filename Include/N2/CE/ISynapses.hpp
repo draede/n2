@@ -54,6 +54,10 @@ public:
 
 	virtual CX::UInt32 GetNextNeuronsCount() const = 0;
 
+	virtual CX::UInt32 GetWeightsCount() const = 0;
+
+	virtual CX::UInt32 GetBiasesCount() const = 0;
+
 	virtual CX::Bool HasBias() const = 0;
 
 	virtual CX::Float GetBias() const = 0;

@@ -63,9 +63,13 @@ public:
 
 	CX::Float GetBias() const;
 
+	CX::UInt32 GetWeightsCount() const;
+
 	const CX::Float *GetWeights() const;
 
 	CX::Float *GetWeights();
+
+	CX::UInt32 GetBiasesCount() const;
 
 	const CX::Float *GetBiases() const;
 

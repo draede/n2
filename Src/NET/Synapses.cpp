@@ -149,6 +149,11 @@ Float Synapses::GetBias() const
 	return m_fBias;
 }
 
+UInt32 Synapses::GetWeightsCount() const
+{
+	return m_cPrevNeurons * m_cNextNeurons;
+}
+
 const Float *Synapses::GetWeights() const
 {
 	return m_weigths;
@@ -157,6 +162,18 @@ const Float *Synapses::GetWeights() const
 Float *Synapses::GetWeights()
 {
 	return m_weigths;
+}
+
+UInt32 Synapses::GetBiasesCount() const
+{
+	if (m_bHasBias)
+	{
+		return m_cNextNeurons;
+	}
+	else
+	{
+		return 0;
+	}
 }
 
 const Float *Synapses::GetBiases() const

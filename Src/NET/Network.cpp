@@ -27,8 +27,6 @@
  */
 
 #include "N2/NET/Network.hpp"
-#include "CX/Util/RndGen.hpp"
-#include <random>
 
 
 using namespace CX;
@@ -206,40 +204,41 @@ Neurons *Network::GetOutputNeurons()
 	return m_pOutputNeurons;
 }
 
-Status Network::InitGaussionWeightsAndBiases()
+Status Network::LoadWeightsAndBiases(const SynapsesDataVector *pVectorSynapsesData)
 {
 	if (0 == m_cLayers)
 	{
 		return Status(Status_NotInitialized, "Not initialized at {1}:{2}", __FILE__, __LINE__);
 	}
-
-	Synapses   *pSynapses;
-	UInt32     cCount;
-	Float      *values;
-
-	pSynapses = m_pInputNeurons->m_pNextSynapses;
-	while (NULL != pSynapses)
+	if (pVectorSynapsesData->size() != m_cLayers)
 	{
-		cCount = pSynapses->m_cPrevNeurons * pSynapses->m_cNextNeurons;
-		values = pSynapses->m_weigths;
+		return Status(Status_InvalidArg, "Invalid arg at {1}:{2}", __FILE__, __LINE__);
+	}
 
-		std::default_random_engine        generator;
-		std::normal_distribution<float>   distribution(0, sqrt((Float)pSynapses->m_cNextNeurons));
+	Synapses *pSynapses = m_pInputNeurons->GetNextSynapses();
 
-		for (UInt32 i = 0; i < cCount; i++)
+	for (auto iterSynapses = pVectorSynapsesData->begin(); iterSynapses != pVectorSynapsesData->end(); ++iterSynapses)
+	{
+		if (iterSynapses->vectorWeights.size() != pSynapses->GetWeightsCount())
 		{
-			values[i] = distribution(generator);
+			return Status(Status_InvalidArg, "Invalid arg at {1}:{2}", __FILE__, __LINE__);
 		}
 		if (pSynapses->HasBias())
 		{
-			cCount = pSynapses->m_cNextNeurons;
-			values = pSynapses->m_biases;
-			for (UInt32 i = 0; i < cCount; i++)
+			if (iterSynapses->vectorBiases.size() != pSynapses->GetBiasesCount())
 			{
-				values[i] = distribution(generator);
+				return Status(Status_InvalidArg, "Invalid arg at {1}:{2}", __FILE__, __LINE__);
 			}
 		}
-		pSynapses = pSynapses->m_pNextNeurons->m_pNextSynapses;
+		memcpy(pSynapses->GetWeights(), iterSynapses->vectorWeights.data(), sizeof(Float) * pSynapses->GetWeightsCount());
+		if (pSynapses->HasBias())
+		{
+			memcpy(pSynapses->GetBiases(), iterSynapses->vectorBiases.data(), sizeof(Float) * pSynapses->GetBiasesCount());
+		}
+		if (NULL != pSynapses->GetNextNeurons())
+		{
+			pSynapses = pSynapses->GetNextNeurons()->GetNextSynapses();
+		}
 	}
 
 	return Status();

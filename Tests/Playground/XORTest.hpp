@@ -18,8 +18,8 @@ public:
 	{
 		static const N2::NET::Layer   LAYERS[]     = 
 		{
-			{ 8, N2::NET::Activation::RELU,    0, { 0.0f }, CX::True, 0.1f },
-			{ 1, N2::NET::Activation::Sigmoid, 0, { 0.0f }, CX::True, 0.1f }
+			{ 4, N2::NET::Activation::RELU,    0, { 0.0f }, CX::True, 1.0f },
+			{ 1, N2::NET::Activation::Sigmoid, 0, { 0.0f }, CX::True, 1.0f }
 		};
 		static const CX::Size         LAYERS_COUNT = sizeof(LAYERS) / sizeof(LAYERS[0]);
 
@@ -32,22 +32,7 @@ public:
 
 		if ((status = network.Init(2, LAYERS_COUNT, LAYERS)))
 		{
-			{
-				auto s = network.GetInputNeurons()->GetNextSynapses();
-
-				memcpy(s->GetWeights(), GetLayer1Weights(), 
-				       sizeof(CX::Float) * s->GetPrevNeuronsCount() * s->GetNextNeuronsCount());
-				memcpy(s->GetBiases(), GetLayer1Biases(), 
-				       sizeof(CX::Float) * s->GetNextNeuronsCount());
-			}
-			{
-				auto s = network.GetInputNeurons()->GetNextSynapses()->GetNextNeurons()->GetNextSynapses();
-
-				memcpy(s->GetWeights(), GetLayer2Weights(), 
-				       sizeof(CX::Float) * s->GetPrevNeuronsCount() * s->GetNextNeuronsCount());
-				memcpy(s->GetBiases(), GetLayer2Biases(), 
-				       sizeof(CX::Float) * s->GetNextNeuronsCount());
-			}
+			status = network.LoadWeightsAndBiases(GetSynapses());
 
 			if ((status = pProvider->Init()))
 			{
@@ -107,49 +92,30 @@ private:
 	{
 	}
 
-	static const CX::Float *GetLayer1Weights()
+	static const N2::NET::Network::SynapsesDataVector *GetSynapses()
 	{
-		static const CX::Float weights[] = 
+		static const N2::NET::Network::SynapsesDataVector   synapses =
 		{
-			-0.38944697f,  1.80160800f,  1.528211200f,  0.87701064f, 
-			 1.61045200f, -1.80729030f,  1.093430900f, -1.24896350f, 
-			-0.49617475f, -1.80160780f, -0.046994260f, -0.14546493f, 
-			-1.61045250f,  1.80729020f, -0.210317060f, -1.24896320f, 
+			{
+				{
+					 0.90435636f, -0.6495106f, 1.4241946f, 3.095701f, -2.2604134f,
+					 -0.2627566f, 1.4255588f, -3.095972f,
+				},
+				{
+					 2.2279282f, 0.0f, -1.4257591f, -0.00032601392f,
+				},
+			},
+			{
+				{
+					 -4.1502724f, 1.0780509f, -3.9523096f, 4.2421966f,
+				},
+				{
+					 4.5951185f,
+				},
+			},
 		};
 
-		return weights;
-	}
-
-	static const CX::Float *GetLayer1Biases()
-	{
-		static const CX::Float biases[] = 
-		{
-			-7.5695477e-04f, -6.1914193e-07f,  5.4668248e-01f,  1.8350729e-01f,
-			-6.3862166e-07f, -6.8108091e-07f,  2.1720655e-01f,  1.2489622e+00f, 
-		};
-
-		return biases;
-	}
-
-	static const CX::Float *GetLayer2Weights()
-	{
-		static const CX::Float weights[] = 
-		{
-			 0.42521372f,  2.72128840f, -1.84937610f, -0.67103493f,
-			 2.91516540f,  3.19844580f, -0.16693713f, -2.70436200f,
-		};
-
-		return weights;
-	}
-
-	static const CX::Float *GetLayer2Biases()
-	{
-		static const CX::Float biases[] = 
-		{
-			-0.08082663f,
-		};
-
-		return biases;
+		return &synapses;
 	}
 
 };

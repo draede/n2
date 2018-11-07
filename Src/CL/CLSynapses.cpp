@@ -72,33 +72,32 @@ Status Synapses::Init(NET::Synapses *pSynapses)
 		}
 
 		m_weights = cl::Buffer(*m_pNetwork->GetProvider()->GetContext(), CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR, 
-		                      sizeof(Float) * pSynapses->GetPrevNeuronsCount() * pSynapses->GetNextNeuronsCount(), 
+		                      sizeof(Float) * pSynapses->GetWeightsCount(), 
 		                      pSynapses->GetWeights(), &nError);
 		if (CL_SUCCESS != nError)
 		{
 			status = Status(Status_MemAllocFailed, "Failed to allocate {1} bytes at {2}:{3}", 
-			                sizeof(Float) * pSynapses->GetPrevNeuronsCount() * pSynapses->GetNextNeuronsCount(), __FILE__, 
-			                __LINE__);
+			                sizeof(Float) * pSynapses->GetWeightsCount(), __FILE__, __LINE__);
 
 			break;
 		}
 		if (pSynapses->HasBias())
 		{
 			m_biases = cl::Buffer(*m_pNetwork->GetProvider()->GetContext(), CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR, 
-			                      sizeof(Float) * pSynapses->GetNextNeuronsCount(), pSynapses->GetBiases(), &nError);
+			                      sizeof(Float) * pSynapses->GetBiasesCount(), pSynapses->GetBiases(), &nError);
 			if (CL_SUCCESS != nError)
 			{
 				status = Status(Status_MemAllocFailed, "Failed to allocate {1} bytes at {2}:{3}", 
-			                   sizeof(Float) * pSynapses->GetNextNeuronsCount(), __FILE__, __LINE__);
+			                   sizeof(Float) * pSynapses->GetBiasesCount(), __FILE__, __LINE__);
 
 				break;
 			}
 		}
 		m_pSynapses   = pSynapses;
-		m_cbMemSize += sizeof(Float) * pSynapses->GetPrevNeuronsCount() * pSynapses->GetNextNeuronsCount();
+		m_cbMemSize += sizeof(Float) * pSynapses->GetWeightsCount();
 		if (pSynapses->HasBias())
 		{
-			m_cbMemSize += sizeof(Float) * pSynapses->GetNextNeuronsCount();
+			m_cbMemSize += sizeof(Float) * pSynapses->GetBiasesCount();
 		}
 
 		break;
@@ -146,6 +145,26 @@ UInt32 Synapses::GetNextNeuronsCount() const
 	}
 
 	return m_pSynapses->GetNextNeuronsCount();
+}
+
+UInt32 Synapses::GetWeightsCount() const
+{
+	if (NULL == m_pSynapses)
+	{
+		return 0;
+	}
+
+	return m_pSynapses->GetWeightsCount();
+}
+
+UInt32 Synapses::GetBiasesCount() const
+{
+	if (NULL == m_pSynapses)
+	{
+		return 0;
+	}
+
+	return m_pSynapses->GetBiasesCount();
 }
 
 Bool Synapses::HasBias() const
@@ -208,7 +227,7 @@ Status Synapses::SyncToCE(Bool bWait/* = True*/)
 	cl_int   nError;
 
 	if (CL_SUCCESS != (nError = m_pNetwork->GetQueue()->enqueueWriteBuffer(m_weights, bWait ? CL_TRUE : CL_FALSE, 0, 
-	                            sizeof(Float) * m_pSynapses->GetPrevNeuronsCount() * m_pSynapses->GetNextNeuronsCount(), 
+	                            sizeof(Float) * m_pSynapses->GetWeightsCount(), 
 	                            m_pSynapses->GetWeights())))
 	{
 		return Status(Status_OperationFailed, "Failed to write weights buffer at {1}:{2}", __FILE__, __LINE__);
@@ -216,7 +235,7 @@ Status Synapses::SyncToCE(Bool bWait/* = True*/)
 	if (HasBias())
 	{
 		if (CL_SUCCESS != (nError = m_pNetwork->GetQueue()->enqueueWriteBuffer(m_biases, bWait ? CL_TRUE : CL_FALSE, 0, 
-		                                   sizeof(Float) * m_pSynapses->GetNextNeuronsCount(), m_pSynapses->GetBiases())))
+		                                   sizeof(Float) * m_pSynapses->GetBiasesCount(), m_pSynapses->GetBiases())))
 		{
 			return Status(Status_OperationFailed, "Failed to write weights buffer at {1}:{2}", __FILE__, __LINE__);
 		}
@@ -235,7 +254,7 @@ Status Synapses::SyncFromCE(Bool bWait/* = True*/)
 	cl_int   nError;
 
 	if (CL_SUCCESS != (nError = m_pNetwork->GetQueue()->enqueueReadBuffer(m_weights, bWait ? CL_TRUE : CL_FALSE, 0, 
-	                            sizeof(Float) * m_pSynapses->GetPrevNeuronsCount() * m_pSynapses->GetNextNeuronsCount(), 
+	                            sizeof(Float) * m_pSynapses->GetWeightsCount(), 
 	                            m_pSynapses->GetWeights())))
 	{
 		return Status(Status_OperationFailed, "Failed to read weights buffer at {1}:{2}", __FILE__, __LINE__);
@@ -243,7 +262,7 @@ Status Synapses::SyncFromCE(Bool bWait/* = True*/)
 	if (HasBias())
 	{
 		if (CL_SUCCESS != (nError = m_pNetwork->GetQueue()->enqueueReadBuffer(m_biases, bWait ? CL_TRUE : CL_FALSE, 0, 
-		                                   sizeof(Float) * m_pSynapses->GetNextNeuronsCount(), m_pSynapses->GetBiases())))
+		                                   sizeof(Float) * m_pSynapses->GetBiasesCount(), m_pSynapses->GetBiases())))
 		{
 			return Status(Status_OperationFailed, "Failed to read weights buffer at {1}:{2}", __FILE__, __LINE__);
 		}

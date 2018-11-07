@@ -33,6 +33,7 @@
 #include "CX/Status.hpp"
 #include "CX/Print.hpp"
 #include "CX/Str/StringHelper.hpp"
+#include "CX/Vector.hpp"
 #include "N2/NET/Activation.hpp"
 #include "N2/NET/Layer.hpp"
 #include "N2/NET/Neurons.hpp"
@@ -50,6 +51,16 @@ class Network
 public:
 
 	static const CX::UInt32   MIN_LAYERS = 2;
+
+	typedef CX::Vector<CX::Float>::Type       FloatsVector;
+
+	struct SynapsesData
+	{
+		FloatsVector   vectorWeights;
+		FloatsVector   vectorBiases;
+	};
+
+	typedef CX::Vector<SynapsesData>::Type    SynapsesDataVector;
 
 	Network();
 
@@ -71,7 +82,7 @@ public:
 
 	Neurons *GetOutputNeurons();
 
-	CX::Status InitGaussionWeightsAndBiases();
+	CX::Status LoadWeightsAndBiases(const SynapsesDataVector *pVectorSynapsesData);
 
 	CX::Size GetMemSize() const;
 
@@ -144,7 +155,7 @@ public:
 			}
 			CX::Print(out, "    Weights: {1} x {2}\n", pSynapses->GetPrevNeuronsCount(), pSynapses->GetNextNeuronsCount());
 			values = pSynapses->GetWeights();
-			if (50 >= pSynapses->GetPrevNeuronsCount() * pSynapses->GetNextNeuronsCount())
+			if (50 >= pSynapses->GetWeightsCount())
 			{
 				for (CX::UInt32 i = 0; i < pSynapses->GetPrevNeuronsCount(); i++)
 				{
@@ -161,9 +172,9 @@ public:
 				values = pSynapses->GetBiases();
 				CX::Print(out, "    Biases: 1 x {1}\n", pSynapses->GetNextNeuronsCount());
 				CX::Print(out, "     ");
-				if (20 >= pSynapses->GetNextNeuronsCount())
+				if (20 >= pSynapses->GetBiasesCount())
 				{
-					for (CX::UInt32 i = 0; i < pSynapses->GetNextNeuronsCount(); i++)
+					for (CX::UInt32 i = 0; i < pSynapses->GetBiasesCount(); i++)
 					{
 						CX::Print(out, " {1:.6}", values[i]);
 					}

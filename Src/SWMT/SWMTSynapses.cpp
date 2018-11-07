@@ -72,33 +72,30 @@ Status Synapses::Init(NET::Synapses *pSynapses)
 			break;
 		}
 
-		if (NULL == (m_weights = (Float *)Mem::Alloc(
-		                            sizeof(Float) * pSynapses->GetPrevNeuronsCount() * pSynapses->GetNextNeuronsCount())))
+		if (NULL == (m_weights = (Float *)Mem::Alloc(sizeof(Float) * pSynapses->GetWeightsCount())))
 		{
 			status = Status(Status_MemAllocFailed, "Failed to allocate {1} bytes at {2}:{3}", 
-			                sizeof(Float) * pSynapses->GetPrevNeuronsCount() * pSynapses->GetNextNeuronsCount(), __FILE__, 
-			                __LINE__);
+			                sizeof(Float) * pSynapses->GetWeightsCount(), __FILE__, __LINE__);
 
 			break;
 		}
-		memcpy(m_weights, pSynapses->GetWeights(), 
-		       sizeof(Float) * pSynapses->GetPrevNeuronsCount() * pSynapses->GetNextNeuronsCount());
+		memcpy(m_weights, pSynapses->GetWeights(), sizeof(Float) * pSynapses->GetWeightsCount());
 		if (pSynapses->HasBias())
 		{
-			if (NULL == (m_biases = (Float *)Mem::Alloc(sizeof(Float) * pSynapses->GetNextNeuronsCount())))
+			if (NULL == (m_biases = (Float *)Mem::Alloc(sizeof(Float) * pSynapses->GetBiasesCount())))
 			{
 				status = Status(Status_MemAllocFailed, "Failed to allocate {1} bytes at {2}:{3}", 
-			                   sizeof(Float) * pSynapses->GetNextNeuronsCount(), __FILE__, __LINE__);
+			                   sizeof(Float) * pSynapses->GetBiasesCount(), __FILE__, __LINE__);
 
 				break;
 			}
-			memcpy(m_biases, pSynapses->GetBiases(), sizeof(Float) * pSynapses->GetNextNeuronsCount());
+			memcpy(m_biases, pSynapses->GetBiases(), sizeof(Float) * pSynapses->GetBiasesCount());
 		}
 		m_pSynapses   = pSynapses;
-		m_cbMemSize += sizeof(Float) * pSynapses->GetPrevNeuronsCount() * pSynapses->GetNextNeuronsCount();
+		m_cbMemSize += sizeof(Float) * pSynapses->GetWeightsCount();
 		if (pSynapses->HasBias())
 		{
-			m_cbMemSize += sizeof(Float) * pSynapses->GetNextNeuronsCount();
+			m_cbMemSize += sizeof(Float) * pSynapses->GetBiasesCount();
 		}
 
 		break;
@@ -154,6 +151,26 @@ UInt32 Synapses::GetNextNeuronsCount() const
 	}
 
 	return m_pSynapses->GetNextNeuronsCount();
+}
+
+UInt32 Synapses::GetWeightsCount() const
+{
+	if (NULL == m_pSynapses)
+	{
+		return 0;
+	}
+
+	return m_pSynapses->GetWeightsCount();
+}
+
+UInt32 Synapses::GetBiasesCount() const
+{
+	if (NULL == m_pSynapses)
+	{
+		return 0;
+	}
+
+	return m_pSynapses->GetBiasesCount();
 }
 
 Bool Synapses::HasBias() const
@@ -215,12 +232,11 @@ Status Synapses::SyncToCE(Bool bWait/* = True*/)
 
 	CX_UNUSED(bWait);
 
-	memcpy(m_weights, m_pSynapses->GetWeights(), 
-	       sizeof(Float) * m_pSynapses->GetPrevNeuronsCount() * m_pSynapses->GetNextNeuronsCount());
+	memcpy(m_weights, m_pSynapses->GetWeights(), sizeof(Float) * m_pSynapses->GetWeightsCount());
 
 	if (HasBias())
 	{
-		memcpy(m_biases, m_pSynapses->GetBiases(), sizeof(Float) * m_pSynapses->GetNextNeuronsCount());
+		memcpy(m_biases, m_pSynapses->GetBiases(), sizeof(Float) * m_pSynapses->GetBiasesCount());
 	}
 
 	return Status();
@@ -235,12 +251,11 @@ Status Synapses::SyncFromCE(Bool bWait/* = True*/)
 
 	CX_UNUSED(bWait);
 
-	memcpy(m_pSynapses->GetWeights(), m_weights, 
-	       sizeof(Float) * m_pSynapses->GetPrevNeuronsCount() * m_pSynapses->GetNextNeuronsCount());
+	memcpy(m_pSynapses->GetWeights(), m_weights, sizeof(Float) * m_pSynapses->GetWeightsCount());
 
 	if (HasBias())
 	{
-		memcpy(m_pSynapses->GetBiases(), m_biases, sizeof(Float) * m_pSynapses->GetNextNeuronsCount());
+		memcpy(m_pSynapses->GetBiases(), m_biases, sizeof(Float) * m_pSynapses->GetBiasesCount());
 	}
 
 	return Status();

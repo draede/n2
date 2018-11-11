@@ -1,3 +1,30 @@
+/* 
+ * N2
+ *
+ * https://github.com/draede/n2
+ * 
+ * Copyright (C) 2018 draede - draede [at] outlook [dot] com
+ *
+ * Released under the MIT License.
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */ 
 
 #pragma once
 
@@ -8,6 +35,7 @@
 #include "CX/Util/Timer.hpp"
 #include "N2/NET/Network.hpp"
 #include "N2/CL/Provider.hpp"
+#include "N2/NET/BinaryFormat.hpp"
 
 
 class XORTest
@@ -16,10 +44,11 @@ public:
 
 	static void Run(N2::CE::IProvider *pProvider)
 	{
+		static const CX::UInt32       INPUTS_COUNT =  2 ;
 		static const N2::NET::Layer   LAYERS[]     = 
 		{
-			{ 4, N2::NET::Activation::RELU,    0, { 0.0f }, CX::True, 1.0f },
-			{ 1, N2::NET::Activation::Sigmoid, 0, { 0.0f }, CX::True, 1.0f }
+			{  4 ,  N2::NET::Activation::RELU, 0, { 0.0f } ,  CX::True , 1.0f },
+			{  1 ,  N2::NET::Activation::Sigmoid, 0, { 0.0f } ,  CX::True , 1.0f }
 		};
 		static const CX::Size         LAYERS_COUNT = sizeof(LAYERS) / sizeof(LAYERS[0]);
 
@@ -30,48 +59,55 @@ public:
 		CX::Float          expected[4 * 1] = { 0.01f, 0.99f, 0.99f, 0.01f };
 		CX::Status         status;
 
-		if ((status = network.Init(2, LAYERS_COUNT, LAYERS)))
+		//if ((status = N2::NET::BinaryFormat::LoadNeurons(&network, "neurons.n2n.bin")))
+		if ((status = network.Init(INPUTS_COUNT, LAYERS_COUNT, LAYERS)))
 		{
-			status = network.LoadWeightsAndBiases(GetSynapses());
-
-			if ((status = pProvider->Init()))
+			//if ((status = N2::NET::BinaryFormat::LoadSynapses(&network, "synapses.n2s.bin")))
+			if ((status = status = network.LoadWeightsAndBiases(GetSynapses())))
 			{
-				if (NULL != (pCENetwork = pProvider->CreateNetwork()))
+				if ((status = pProvider->Init()))
 				{
-					if ((status = pCENetwork->Init(&network)))
+					if (NULL != (pCENetwork = pProvider->CreateNetwork()))
 					{
-						status = pCENetwork->Evaluate(4, inputs, outputs);
-
-						for (CX::Size i = 0; i < 4; i++)
+						if ((status = pCENetwork->Init(&network)))
 						{
-							CX::Print(stdout, "Expected : {1}, Computed : {2}\n", expected[i], outputs[i]);
-						}
+							status = pCENetwork->Evaluate(4, inputs, outputs);
 
-						pCENetwork->Uninit();
+							for (CX::Size i = 0; i < 4; i++)
+							{
+								CX::Print(stdout, "Expected : {1}, Computed : {2}\n", expected[i], outputs[i]);
+							}
+
+							pCENetwork->Uninit();
+						}
+						else
+						{
+							CX::Print(stdout, "N2::CL::Network::Init : {1}\n", status.GetMsg());
+						}
+						pProvider->DestroyNetwork(pCENetwork);
 					}
 					else
 					{
-						CX::Print(stdout, "N2::CL::Network::Init : {1}\n", status.GetMsg());
+						CX::Print(stdout, "N2::CL::Provider::CreateNetwork : {1}\n", status.GetMsg());
 					}
-					pProvider->DestroyNetwork(pCENetwork);
+
+					pProvider->Uninit();
 				}
 				else
 				{
-					CX::Print(stdout, "N2::CL::Provider::CreateNetwork : {1}\n", status.GetMsg());
-				}
+					CX::Print(stdout, "N2::CL::Provider::Init : {1}\n", status.GetMsg());
 
-				pProvider->Uninit();
+					N2::CL::Provider   *pCLProvider = dynamic_cast<N2::CL::Provider *>(pProvider);
+
+					if (NULL != pCLProvider)
+					{
+						CX::Print(stdout, "Build log : \n{1}\n", pCLProvider->GetBuildLog());
+					}
+				}
 			}
 			else
 			{
-				CX::Print(stdout, "N2::CL::Provider::Init : {1}\n", status.GetMsg());
-
-				N2::CL::Provider   *pCLProvider = dynamic_cast<N2::CL::Provider *>(pProvider);
-
-				if (NULL != pCLProvider)
-				{
-					CX::Print(stdout, "Build log : \n{1}\n", pCLProvider->GetBuildLog());
-				}
+				CX::Print(stdout, "N2::NET::Network::LoadWeightsAndBiases : {1}\n", status.GetMsg());
 			}
 
 			status = network.Uninit();
@@ -98,21 +134,21 @@ private:
 		{
 			{
 				{
-					 0.90435636f, -0.6495106f, 1.4241946f, 3.095701f, -2.2604134f,
-					 -0.2627566f, 1.4255588f, -3.095972f,
-				},
+						-3.4795704f, -0.08041801f, 2.7649038f, -0.87902904f, 3.4795713f, 
+						0.08041863f, -2.7649038f, -0.1809907f, 
+				}, 
 				{
-					 2.2279282f, 0.0f, -1.4257591f, -0.00032601392f,
-				},
-			},
+						-3.8648506e-07f, 0.54109365f, 1.6844277e-08f, 0.0f, 
+				}, 
+			}, 
 			{
 				{
-					 -4.1502724f, 1.0780509f, -3.9523096f, 4.2421966f,
-				},
+						2.7363226f, -1.783619f, 3.3398473f, -0.16329283f, 
+				}, 
 				{
-					 4.5951185f,
-				},
-			},
+						-3.6300147f, 
+				}, 
+			}, 
 		};
 
 		return &synapses;

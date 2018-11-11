@@ -31,7 +31,9 @@
 
 #include "CX/Types.hpp"
 #include "CX/Status.hpp"
-#include "N2/NET/Activation.hpp"
+#include "CX/IO/IInputStream.hpp"
+#include "CX/IO/IOutputStream.hpp"
+#include "N2/NET/Network.hpp"
 
 
 namespace N2
@@ -40,60 +42,45 @@ namespace N2
 namespace NET
 {
 
-class Synapses;
-class Neurons
+class BinaryFormat
 {
 public:
 
-	static const CX::UInt32 MIN_NEURONS               = 1;
-	static const CX::UInt32 MAX_NEURONS               = 65536;
-	static const CX::UInt32 MAX_ACTIVATION_ARGS_COUNT = 10;
+	static const CX::UInt32   NEURONS_MAGIC    = 0x444E324E;
+	static const CX::UInt32   NEURONS_VERSION  = 0x00000001;
 
-	Neurons();
+	static const CX::UInt32   SYNAPSES_MAGIC   = 0x4453324E;
+	static const CX::UInt32   SYNAPSES_VERSION = 0x00000001;
 
-	~Neurons();
+	static CX::Status LoadNeurons(Network *pNetwork, const CX::Char *szPath);
 
-	CX::Status Init(CX::UInt32 cNeuronsCount, ActivationType nActivation = Activation::Identity,
-	                CX::UInt32 cActivationArgs = 0, const CX::Float *activationArgs = NULL);
+	static CX::Status SaveNeurons(const Network *pNetwork, const CX::Char *szPath);
 
-	CX::Status Uninit();
+	static CX::Status LoadSynapses(Network *pNetwork, const CX::Char *szPath);
 
-	CX::Bool IsOK() const;
+	static CX::Status SaveSynapses(const Network *pNetwork, const CX::Char *szPath);
 
-	CX::UInt32 GetNeuronsCount() const;
+private:
 
-	const CX::Float *GetValues() const;
+	BinaryFormat();
 
-	CX::Float *GetValues();
+	~BinaryFormat();
 
-	ActivationType GetActivation() const;
+	template <typename T>
+	static CX::Status Write(CX::IO::IOutputStream *pOutputStream, T val)
+	{
+		return Write(pOutputStream, &val, sizeof(T));
+	}
 
-	CX::UInt32 GetActivationArgsCount() const;
+	static CX::Status Write(CX::IO::IOutputStream *pOutputStream, const void *pData, CX::Size cbSize);
 
-	const CX::Float *GetActivationArgs() const;
+	template <typename T>
+	static CX::Status Read(CX::IO::IInputStream *pInputStream, T *pVal)
+	{
+		return Read(pInputStream, pVal, sizeof(T));
+	}
 
-	const Synapses *GetPrevSynapses() const;
-
-	Synapses *GetPrevSynapses();
-
-	const Synapses *GetNextSynapses() const;
-
-	Synapses *GetNextSynapses();
-
-	CX::Size GetMemSize() const;
-
-protected:
-
-	friend class Network;
-
-	CX::UInt32           m_cNeurons;
-	CX::Float            *m_values;
-	ActivationType       m_nActivation;
-	CX::UInt32           m_cActivationArgs;
-	CX::Float            m_activationArgs[MAX_ACTIVATION_ARGS_COUNT];
-	Synapses             *m_pPrevSynapses;
-	Synapses             *m_pNextSynapses;
-	CX::Size             m_cbMemSize;
+	static CX::Status Read(CX::IO::IInputStream *pInputStream, void *pData, CX::Size cbSize);
 
 };
 

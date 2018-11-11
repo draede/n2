@@ -1,0 +1,7 @@
+      static const CX::UInt32       INPUTS_COUNT =  2 ;
+      static const N2::NET::Layer   LAYERS[]     = 
+      {
+      {  4 ,  N2::NET::Activation::RELU, 0, { 0.0f } ,  CX::True , 1.0f }, 
+      {  1 ,  N2::NET::Activation::Sigmoid, 0, { 0.0f } ,  CX::True , 1.0f }, 
+      };
+      static const CX::Size         LAYERS_COUNT = sizeof(LAYERS) / sizeof(LAYERS[0]);

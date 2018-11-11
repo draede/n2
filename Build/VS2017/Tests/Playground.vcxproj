@@ -187,6 +187,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Src\NET\BinaryFormat.cpp" />
     <ClCompile Include="..\..\..\Tests\Playground\Main.cpp" />
     <ClCompile Include="..\..\..\Src\CL\CLProvider.cpp" />
     <ClCompile Include="..\..\..\Src\CL\CLNeurons.cpp" />
@@ -223,6 +224,7 @@
     <ClInclude Include="..\..\..\Include\N2\CL\OpenCL.hpp" />
     <ClInclude Include="..\..\..\Include\N2\CL\Synapses.hpp" />
     <ClInclude Include="..\..\..\Include\N2\NET\Activation.hpp" />
+    <ClInclude Include="..\..\..\Include\N2\NET\BinaryFormat.hpp" />
     <ClInclude Include="..\..\..\Include\N2\NET\Layer.hpp" />
     <ClInclude Include="..\..\..\Include\N2\NET\Neurons.hpp" />
     <ClInclude Include="..\..\..\Include\N2\NET\Network.hpp" />

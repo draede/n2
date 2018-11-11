@@ -114,6 +114,9 @@
     <ClCompile Include="..\..\..\Src\SWMT\SWMTSynapses.cpp">
       <Filter>Source Files\N2\SWMT</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Src\NET\BinaryFormat.cpp">
+      <Filter>Source Files\N2\NET</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Include\N2\NET\Activation.hpp">
@@ -205,6 +208,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Tests\Playground\XORTest.hpp">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Include\N2\NET\BinaryFormat.hpp">
+      <Filter>Header Files\N2\NET</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

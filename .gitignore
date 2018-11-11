@@ -37,6 +37,7 @@ Bin/
 Lib/
 Temp/
 xcuserdata/
+__pycache__/
 
 *.user
 *.opendb

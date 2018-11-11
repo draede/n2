@@ -43,6 +43,8 @@ namespace NET
 
 struct Layer
 {
+	static const CX::UInt32   MAX_LAYERS = 65536;
+
 	CX::UInt32       cNeuronsCount;
 	ActivationType   nActivation;
 	CX::UInt32       cActivationArgs;

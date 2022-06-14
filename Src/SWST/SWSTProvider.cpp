@@ -3,7 +3,7 @@
  *
  * https://github.com/draede/n2
  * 
- * Copyright (C) 2018 draede - draede [at] outlook [dot] com
+ * Copyright (C) 2018 draede
  *
  * Released under the MIT License.
  * 
